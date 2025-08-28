@@ -7,6 +7,7 @@ CSV_PATH = "hanzis.csv"
 CHOICES_PER_QUESTION = 4
 REVIEW_COOLDOWN = 3  # wrong items return after this many questions
 
+
 # ---------- Data ----------
 @st.cache_data
 def load_data(path):
@@ -16,11 +17,13 @@ def load_data(path):
         df[c] = df[c].astype(str).str.strip()
     return df
 
+
 df = load_data(CSV_PATH)
 
 # ---------- Initialize State ----------
 if "phase" not in st.session_state:
-    st.session_state.phase = "question"
+    st.session_state.phase = "mode_selection"
+    st.session_state.mode = None
     st.session_state.remaining = random.sample(df.to_dict(orient="records"), len(df))
     st.session_state.review = []
     st.session_state.current = None
@@ -56,10 +59,19 @@ def pick_next_word():
     return None
 
 
-def make_options(correct):
-    all_meanings = list({m for m in df["meaning"].tolist() if m != correct})
-    random.shuffle(all_meanings)
-    return random.sample(all_meanings, min(len(all_meanings), CHOICES_PER_QUESTION - 1)) + [correct]
+def make_options(correct, mode):
+    if mode == 1:  # Hanzi + Pinyin -> Choose Meaning
+        all_meanings = list({m for m in df["meaning"].tolist() if m != correct})
+        random.shuffle(all_meanings)
+        return random.sample(all_meanings, min(len(all_meanings), CHOICES_PER_QUESTION - 1)) + [correct]
+    elif mode == 2:  # Pinyin + Meaning -> Choose Hanzi
+        all_hanzis = list({h for h in df["hanzi"].tolist() if h != correct})
+        random.shuffle(all_hanzis)
+        return random.sample(all_hanzis, min(len(all_hanzis), CHOICES_PER_QUESTION - 1)) + [correct]
+    else:  # mode == 3: Meaning -> Choose Hanzi
+        all_hanzis = list({h for h in df["hanzi"].tolist() if h != correct})
+        random.shuffle(all_hanzis)
+        return random.sample(all_hanzis, min(len(all_hanzis), CHOICES_PER_QUESTION - 1)) + [correct]
 
 
 def start_new_question():
@@ -69,11 +81,16 @@ def start_new_question():
         return
 
     st.session_state.current = w
-    st.session_state.options = make_options(w["meaning"])
+
+    if st.session_state.mode == 1:
+        st.session_state.correct_answer = w["meaning"]
+    else:
+        st.session_state.correct_answer = w["hanzi"]
+
+    st.session_state.options = make_options(st.session_state.correct_answer, st.session_state.mode)
     random.shuffle(st.session_state.options)
     st.session_state.selected = None
     st.session_state.feedback = None
-    st.session_state.correct_answer = w["meaning"]
     st.session_state.phase = "question"
     st.session_state.qid += 1
 
@@ -102,12 +119,42 @@ def handle_next():
     st.session_state.next_clicked = False
 
 
+def select_mode(mode):
+    st.session_state.mode = mode
+    st.session_state.phase = "question"
+    start_new_question()
+
+
 # ---------- UI ----------
-st.title("Hanzi Trainer with Review Queue")
+st.title("Hanzi Trainer with Multiple Modes")
+
+# Mode selection
+if st.session_state.phase == "mode_selection":
+    st.header("Select a Practice Mode")
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.subheader("Mode 1: Hanzi to Meaning")
+        st.write("See a Hanzi with Pinyin, choose the correct meaning")
+        if st.button("Select Mode 1", key="mode1"):
+            select_mode(1)
+
+    with col2:
+        st.subheader("Mode 2: Pinyin to Hanzi")
+        st.write("See Pinyin with meaning, choose the correct Hanzi")
+        if st.button("Select Mode 2", key="mode2"):
+            select_mode(2)
+
+    with col3:
+        st.subheader("Mode 3: Meaning to Hanzi")
+        st.write("See meaning only, choose the correct Hanzi")
+        if st.button("Select Mode 3", key="mode3"):
+            select_mode(3)
 
 # Sidebar stats
 with st.sidebar:
     st.markdown("### Progress")
+    st.write(f"Mode: {st.session_state.mode}")
     st.write(f"Correct: {st.session_state.score['correct']}")
     st.write(f"Wrong: {st.session_state.score['wrong']}")
     st.write(f"Review queue: {len(st.session_state.review)}")
@@ -122,18 +169,25 @@ if st.session_state.submit_clicked:
 if st.session_state.next_clicked:
     handle_next()
 
-# Load first question if needed
-if st.session_state.current is None and st.session_state.phase != "done":
-    start_new_question()
-
 # Main flow
 if st.session_state.phase == "question" and st.session_state.current:
-    hanzi = st.session_state.current["hanzi"]
-    pinyin = st.session_state.current["pinyin"]
+    if st.session_state.mode == 1:
+        hanzi = st.session_state.current["hanzi"]
+        pinyin = st.session_state.current["pinyin"]
+        st.markdown(f"## {hanzi}  \n*pinyin:* {pinyin}")
+        question_text = "Choose the correct meaning:"
+    elif st.session_state.mode == 2:
+        pinyin = st.session_state.current["pinyin"]
+        meaning = st.session_state.current["meaning"]
+        st.markdown(f"## {pinyin}  \n*meaning:* {meaning}")
+        question_text = "Choose the correct Hanzi:"
+    else:  # mode == 3
+        meaning = st.session_state.current["meaning"]
+        st.markdown(f"## {meaning}")
+        question_text = "Choose the correct Hanzi:"
 
-    st.markdown(f"## {hanzi}  \n*pinyin:* {pinyin}")
     st.session_state.selected = st.radio(
-        "Choose the correct meaning:",
+        question_text,
         st.session_state.options,
         index=None,
         key=f"q_{st.session_state.qid}"
@@ -146,7 +200,16 @@ elif st.session_state.phase == "feedback":
     if st.session_state.feedback == "correct":
         st.success("✅ Correct!")
     else:
-        st.error(f"❌ Wrong! Correct answer: **{st.session_state.correct_answer}**")
+        if st.session_state.mode == 1:
+            correct = st.session_state.current["meaning"]
+        else:
+            correct = st.session_state.current["hanzi"]
+            pinyin = st.session_state.current["pinyin"]
+            meaning = st.session_state.current["meaning"]
+            correct = f"{correct} (pinyin: {pinyin}, meaning: {meaning})"
+
+        st.error(f"❌ Wrong! Correct answer: **{correct}**")
+
     if st.button("Next", key="next_btn"):
         st.session_state.next_clicked = True
         st.rerun()
