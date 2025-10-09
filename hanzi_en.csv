@@ -1,23 +1,25 @@
-hanzi,pinyin,meaning
+﻿hanzi,pinyin,meaning
 爱,ài,to love
+八,bā,eight
 爸爸,bàba,dad
-杯子,bēizi,cup
 北京,Běijīng,Běijīng
+杯子,bēizi,cup
 本,běn,root; stem; origin; source; this; the current; original; inherent; originally; classifier for books
-不客气,bú kèqi,you're welcome; don't mention it
 不,bù,not; no
+不客气,bú kèqi,you're welcome; don't mention it
 菜,cài,vegetable; dish
 茶,chá,tea
 吃,chī,to eat
 出租车,chūzūchē,taxi
-打电话,dǎ diànhuà,to make a phone call
 大,dà,big; large; great
+打电话,dǎ diànhuà,to make a phone call
 的,de,of; structural particle: used before a noun
 点,diǎn,a little; o'clock; to touch; to point
+电脑,diànnǎo,computer
 电视,diànshì,television
 电影,diànyǐng,movie
-都,dōu,all; both
 东西,dōngxi,thing; stuff
+都,dōu,all; both
 读,dú,to read
 对不起,duìbuqǐ,I'm sorry
 多,duō,many; much
@@ -25,13 +27,15 @@ hanzi,pinyin,meaning
 儿子,érzi,son
 饭店,fàndiàn,restaurant; hotel
 飞机,fēijī,airplane
+分钟,fēnzhōng,minute
 高兴,gāoxìng,happy; glad
 个,gè,classifier for people or objects in general
 工作,gōngzuò,work; job
+狗,gǒu,dog
 汉语,Hànyǔ,Chinese language
 好,hǎo,good; well
-喝,hē,to drink
 和,hé,and; with
+喝,hē,to drink
 很,hěn,very
 后面,hòumiàn,behind; back
 回,huí,to return
@@ -40,84 +44,111 @@ hanzi,pinyin,meaning
 几,jǐ,how many; several
 家,jiā,family; home
 叫,jiào,to be called; to call
-看,kàn,to see; to look at; to watch
-看见,kàniàn,to see; to catch sight of
-块,kuài,classifier for pieces of something; a unit of currency
 今天,jīntiān,today
+九,jiǔ,nine
 开,kāi,to open; to start
+看,kàn,to see; to look at; to watch
+看见,kànjiàn,to see; to catch sight of
+块,kuài,classifier for pieces of something; a unit of currency
 来,lái,to come
 老师,lǎoshī,teacher
 了,le,modal particle intensifying preceding clause; completed action marker
 冷,lěng,cold
 里,lǐ,inside; in
+里面,lǐmiàn,inside
 零,líng,zero
+六,liù,six
 吗,ma,"question particle for ""yes-no"" questions"
-妈妈,māma,mom
 买,mǎi,to buy
+妈妈,māma,mom
 猫,māo,cat
 没,méi,not have; there is not
 没关系,méi guānxi,it doesn't matter; that's all right
+们,men ,Used after pronouns or nouns referring to people to indicate plurality
 米饭,mǐfàn,cooked rice
 明天,míngtiān,tomorrow
 名字,míngzi,name
+哪,nǎ,which
+那 (那儿),nà (nàr),that
 哪儿,nǎr,where
-那,nà,that
 呢,ne,question particle for subjects already mentioned
 能,néng,can; be able to
+你,nǐ ,you
 年,nián,year
 女儿,nǚ'ér,daughter
-苹果,píngguǒ,apple
 朋友,péngyou,friend
+漂亮,piàoliang,beautiful
+苹果,píngguǒ,apple
 七,qī,seven
 钱,qián,dinero
 前面,qiánmiàn,in front of
 请,qǐng,please
 去,qù,to go
 热,rè,hot
+人,rén,person
 认识,rènshi,to know; to recognize
+三,sān,three
+上,shàng,up
 商店,shāngdiàn,shop; store
+上午,shàngwǔ,morning
+少,shǎo,"few, little"
 谁,shéi,who
+什么,shénme,"what, why"
+十,shí,ten
+是,shì ,"used like ""be"" before nouns or pronouns to identify, describe or amplify the subject"
 时候,shíhou,time; moment
 书,shū,book
 水,shuǐ,water
 水果,shuǐguǒ,fruit
 睡觉,shuìjiào,to sleep
-我,wǒ,I; me
-你,nǐ ,you
+说,shuō,speak
+说话,shuō huà,speak; talk; say
+四,sì,four
+岁,suì ,year (of age)
 他,tā,he; him
 她,tā,she; her
-们,men ,Used after pronouns or nouns referring to people to indicate plurality
-在,zài ,exist; be alive; be at; be in; be on (a place)
-是,shì ,"used like ""be"" before nouns or pronouns to identify, describe or amplify the subject"
-中国,zhōng guó ,China
-月,yuè ,month
-说话,shuō huà,speak; talk; say
-岁,suì ,year (of age)
 太,tài,too; extremely
 天气,tiānqì,weather
 听,tīng,to listen; to hear
 同学,tóngxué,classmate
-喜欢,xǐhuan,to like
+喂,wèi,hello
+我,wǒ,I; me
+我们,wǒmen,"we, us (pl.)"
+五,wǔ,five
 下,xià,below; down; next
-下午,xiàwǔ,afternoon
-下雨,xiàyǔ,to rain
+想,xiǎng,to think; to want to; to miss
 先生,xiānsheng,sir; Mr.
 现在,xiànzài,now
-想,xiǎng,to think; to want to; to miss
 小,xiǎo,small
 小姐,xiǎojie,Miss; young lady
+下午,xiàwǔ,afternoon
+下雨,xiàyǔ,to rain
 些,xiē,some (a classifier for plurality)
 谢谢,xièxie,thank you
+喜欢,xǐhuan,to like
 星期,xīngqī,week
-学校,xuéxiào,school
-学习,xuéxí,to study; to learn
 学生,xuésheng,student
+学习,xuéxí,to study; to learn
+学校,xuéxiào,school
+一,yī,one
+一点儿,yīdiǎnr,a little bit
 衣服,yīfu,clothes
 医生,yīshēng,doctor
 医院,yīyuàn,hospital
 椅子,yǐzi,chair
 有,yǒu,to have; there is
 月,yuè,month; moon
-在,zài,in; at; on (location)
+月,yuè ,month
+在,zài ,exist; be alive; be at; be in; be on (a place)
 再见,zàijiàn,goodbye
 怎么,zěnme,how
+怎么样,zěnmeyàng,how about
+这 (这儿),zhè ( zhèr),this (here)
+中国,Zhōngguó,China
+中午,zhōngwǔ,noon
+住,zhù,live
+桌子,zhuōzi,desk
+字,zì,character
+做,zuò,do
+坐,zuò,sit
+昨天,zuótiān,yesterday
